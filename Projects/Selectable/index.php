@@ -1,2 +1,1 @@
-<?php include_once("js/index.html"); ?>
-
+<?php header( 'Location:js /index.html' ) ;  ?>
