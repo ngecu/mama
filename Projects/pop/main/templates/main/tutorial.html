@@ -1,0 +1,250 @@
+{% extends 'main/header.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .row,.pagination{
+       display: block;
+    }
+    .likebutton{
+        color: green;
+    }
+    .dislikebutton{
+        color: red;
+    }
+    .dislikebutton,.likebutton{
+        margin: 2%;
+    }
+    a{
+        color: white;
+    }
+    button:hover{
+        background-color: red;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+      $(".toggle-comment").click(function(){
+        $(".comment").toggle();
+      });
+    });
+    </script>
+    <style>
+        .comment{
+            display: none;
+        }
+    </style>
+
+
+    <!-- tutorials -->
+
+        {% for tut in items %}
+        <div class=" p-2 card  col s12, m8, l8 ">
+            <div class="row ">
+                <div class="text-center">
+                    <h3 class="tut_title">{{tut.tutorial_title}}</h3>
+
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p style="font-size:70%">Published {{tut.tutorial_published}}</p>
+
+                </div>
+                <div class="p-2">
+                    <img src="{{tut.image.url}}" alt="" style="width: 100%;">
+                </div>
+                
+                <hr>
+
+                <div class="p-2">
+                    {{tut.tutorial_content|safe}}
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+<!-- paginator -->
+
+    <div class="row text-center">
+       
+        {% if items.paginator.num_pages > 1 %}
+        <div class="row text-center" > 
+            
+        <div class="pagination">
+            {% if items.has_previous %}
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page=1">&#171;First </a>
+            </button>
+        
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page={{ items.previous_page_number }}">&#8249;Previous</a>
+            </button>
+        
+        
+            {% endif %}
+            <span style="color: white;">{{ items.number }}</span ><span style="color: white;">of</span> <span style="color: white;">{{ items.paginator.num_pages }}</span>
+            {% if items.has_next %}
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page={{ items.next_page_number }}">Next &#8250;</a>
+            </button>
+        
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page={{ items.paginator.num_pages }}">Last&#187;</a>
+            </button>
+            {% endif %}
+        </div>
+        </div>
+        
+        {% endif %}
+    </div>
+
+
+    <div class="row text-center">
+        <button class="btn btn-primary toggle-comment">COMMENT</button>
+    <button class="btn btn-primary"> <a href="{{tutorial_series.source_code}}">SOURCE CODE</a> </button>
+    <button class="btn btn-danger"> <a href="{{tutorial_series.video_url}}">VIDEO</a> </button>
+
+    </div>
+
+
+    <div class="row">
+
+            <div class=" p-2 card  col s12, m12, l12 flex-fill bd-highlight comment">
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form method="post" style="margin-top: 1.3em;">
+                            {% csrf_token%}
+                
+                            {{ form.as_p }}
+                
+                            <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                              <h4>Comments({{comment_count}})</h4>
+                              
+                                  <div class="row" style="height: 300px;">
+                                    <div class="col-sm" style="overflow-y: auto;height: 100%;">
+                                      {% for comment in comments %}
+                                      <div class="be-comment d-flex flex-row bd-highlight mb-3">
+                                        <div class="be-img-comment" style="height: 100px;width: 100px;">
+                                            <img src="{% static 'main/img/guest-user.jpg' %}" alt="" class="be-ava-comment" style="height: 100%;width: 100%;">
+                                        </div>
+                        
+                                        <div class="be-comment-content">
+                                          <style>
+                                            p{
+                                              margin: 0;
+                                              padding: 0;
+                                            }
+                                          </style>
+                        
+                                          <p class="be-comment-name">
+                                            <b>
+                                          {{comment.name}}
+                                        </b>
+                                          </p>
+                                         
+                                          <span class="be-comment-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{comment.created_on}}
+                                    
+                                          </span>
+                        
+                                          <p class="be-comment-text">
+                                            {{comment.body}}
+                                          </p>
+                                          <div class="d-flex" >
+                                            <p class="likebutton likerbtn" id="like{{comment.id}}" href="#" data-likecounter="{{ comment.like_set.count }}" data-catid="{{comment.id}}" data-ptext={{comment.body}} ><i class="fas fa-thumbs-up"></i></p> <span style="color: black;" class="likecounter counter" data-likecounter="{{ comment.like_set.count }}">{{ comment.like_set.count }} </span>
+                                            <p class="dislikebutton likerbtn" id="dislike{{comment.id}}" href="#" data-catid="{{comment.id}}" data-ptext={{comment.body}} ><i class="fas fa-thumbs-down"></i></p> <span style="color: black;" class="dislikecounter counter">{{ comment.dislike_set.count }}</span>
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {% endfor %}
+                                    </div>
+
+                                  </div>
+                        
+                                
+                            
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                
+          
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    $('.likebutton').click(function(){
+    
+    var catid = $(this).attr("data-catid");
+    var ptext = $(this).attr("data-ptext");
+    var c = $(this).attr("data-likecounter");
+    console.log("this is catid : ",catid)
+    console.log("this is ptext : ",ptext)
+    console.log("l is",c)
+    $.ajax(
+    {
+        type:"GET",
+        url: "/likecomment",
+        data:{
+                 comment_id: catid,
+                 comment_text:ptext,
+        },
+        success: function( data ) 
+        {
+            
+            
+            var new_pop = parseInt(c) + 1
+            console.log("new",new_pop)
+            document.querySelector('.likecounter').innerHTML = new_pop;
+            $( '#like'+ catid ).remove();
+            M.toast({html: data, classes: 'green rounded', displayLength:10000})
+            
+        }
+     })
+});
+
+$('.dislikebutton').click(function(){
+    var counter = document.querySelector('.dislikecounter').innerHTML;
+    console.log("this is counter",counter)
+
+    var catid = $(this).attr("data-catid");
+    var ptext = $(this).attr("data-ptext");
+    
+  
+    $.ajax(
+    {
+        type:"GET",
+        url: "/dislikecomment",
+        data:{
+                 comment_id: catid,
+                 comment_text:ptext,
+        },
+        success: function( data ) 
+        {
+            
+            $( '#dislike'+ catid ).remove();
+            
+           
+            M.toast({html: data, classes: 'red accent-4 rounded', displayLength:10000})
+
+            
+        }
+     })
+});
+</script>
+
+
+
+
+{% endblock %}

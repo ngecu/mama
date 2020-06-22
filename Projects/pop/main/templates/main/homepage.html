@@ -1,0 +1,40 @@
+{% extends 'main/header.html' %}
+{% load static %}
+{% block content %}
+
+
+<input type="text" name="" class="http_address" id="">
+<button class="btn-primary">
+  Download
+</button>
+<div class="row">
+
+</div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script type="text/javascript">
+
+$('.btn-primary').click(function(){
+    var ad = document.querySelector('.http_address').value;
+    console.log(ad)
+
+    $.ajax(
+    {
+        type:"GET",
+        url: "/information",
+        data:{
+          http: ad,
+                 
+        },
+        success: function( data ) 
+        {
+          
+          console.log("success")
+          M.toast({html: data, classes: 'green rounded', displayLength:10000})
+          $("p").append(" <b>"+ data + "</b>.");
+            
+        }
+     })
+});
+      </script>
+    
+{% endblock %}
