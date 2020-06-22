@@ -1,0 +1,91 @@
+<head>
+  {% load static %}
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/0cc3d8b950.js" crossorigin="anonymous"></script>
+	<link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+    <link href="{% static 'main/css/materialize.css' %}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <title>&#128521;Dev Ngecu</title>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   
+  <!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+  </head>
+
+<body>
+
+    {% include "main/includes/navbar.html" %}
+    {% include "main/includes/messages.html" %}
+    <p id="message" style="float: right;"></p>
+    <div class="d-flex flex-column bd-highlight mb-3 soc1">
+      <div class="p-2 bd-highlight">
+        <a href="https://github.com/ngecu/">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a href="https://www.linkedin.com/in/robinson-ngecu-6a037688/">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a href="https://twitter.com/_ngecu">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+  <div class="container">
+    <br>
+    {% block content %}
+    {% endblock %}
+  <footer>
+    Dev Ngecu &copy; 2020 
+  </footer>
+  </div>
+
+  <div class="d-flex flex-column bd-highlight mb-3 soc2">
+    <div class="p-2 bd-highlight">
+      <a href="https://www.facebook.com/ngecuN">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
+    <div class="p-2 bd-highlight">
+      <a href="https://www.instagram.com/_ngecu/">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    <div class="p-2 bd-highlight">
+      <a href="mailto:devngecu@gmail.com">
+        <i class="fas fa-paper-plane"></i>
+      </a>
+    </div>
+  </div>
+ 
+ 
+          
+  
+  <script src="{% static 'main/js/typeWriter.js' %}"></script>
+  <script src="{% static 'main/js/chartjs.js' %}"></script>
+  <script src="{% static 'main/js/prism.js' %}"></script>
+
+  
+  <script>
+    M.AutoInit();
+    var ctx = document.getElementById("myChart");
+ctx.height = 120;
+  </script>
+  
+
+</body>
+
+
+
