@@ -10,3 +10,9 @@ sqlparse==0.3.1
 typing-extensions==3.7.4.2
 whitenoise==5.1.0
 you-get==0.4.1432
+django-cors-headers==3.3.0
+django-heroku==0.3.1
+jsmin==2.2.2
+Pillow==7.1.2
+pytz==2020.1
+whitenoise==5.1.0
