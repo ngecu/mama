@@ -1,0 +1,349 @@
+{% extends 'main/header.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .row,.pagination{
+       display: block;
+    }
+    .likebutton{
+        color: green;
+    }
+    .dislikebutton{
+        color: red;
+    }
+    .dislikebutton,.likebutton{
+        margin: 2%;
+    }
+    a{
+        color: white;
+    }
+    button:hover{
+        background-color: red;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.5; /* Firefox */
+}
+</style>
+<script>
+    $(document).ready(function(){
+      $(".toggle-comment").click(function(){
+        $(".comment").toggle();
+      });
+    });
+    </script>
+    <style>
+        .comment{
+            display: none;
+        }
+    </style>
+
+
+    <!-- tutorials -->
+
+        {% for tut in items %}
+        <div class=" p-2 card  col s12, m8, l8 ">
+            <div class="row ">
+                <div class="text-center">
+                    <h3 class="tut_title" style="font-family: 'Modak', cursive;">{{tut.tutorial_title}}</h3>
+
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p style="font-size:70%">Published {{tut.tutorial_published}}</p>
+
+                </div>
+                <div class="p-2">
+                    <img src="{{tut.image}}" alt="" style="width: 100%;">
+                </div>
+                
+                <hr>
+
+                <div class="p-2">
+                    {{tut.tutorial_content|safe}}
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+<!-- paginator -->
+
+    <div class="row text-center">
+       
+        {% if items.paginator.num_pages > 1 %}
+        <div class="row text-center" > 
+            
+        <div class="pagination">
+            {% if items.has_previous %}
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page=1">&#171;First </a>
+            </button>
+        
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page={{ items.previous_page_number }}">&#8249;Previous</a>
+            </button>
+        
+        
+            {% endif %}
+            <span style="color: white;">{{ items.number }}</span ><span style="color: white;">of</span> <span style="color: white;">{{ items.paginator.num_pages }}</span>
+            {% if items.has_next %}
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page={{ items.next_page_number }}">Next &#8250;</a>
+            </button>
+        
+            <button type="button" class="btn deep-orange darken-4">
+                <a style="color: white;" href="?page={{ items.paginator.num_pages }}">Last&#187;</a>
+            </button>
+            {% endif %}
+        </div>
+        </div>
+        
+        {% endif %}
+    </div>
+
+
+    <div class="row text-center">
+        <button class="btn btn-primary toggle-comment">COMMENT</button>
+    <button class="btn btn-primary"> <a href="{{tutorial_series.source_code}}">SOURCE CODE</a> </button>
+    <button class="btn btn-danger"> <a href="{{tutorial_series.video_url}}">VIDEO</a> </button>
+
+    </div>
+
+
+    <div class="row">
+
+            <div class=" p-2 card  col s12, m12, l12 flex-fill bd-highlight comment">
+                <div class="d-flex bd-highlight">
+                    <div class="col s12, m12, l12   p-2 flex-fill bd-highlight">
+                        <label for="commentor_name">Name</label>
+                            <input type="text" name="commentor_name" class="commentor_name" id="commentor_name" placeholder="eg.Dev Ngecu" style=" background-color: #2f353b;color: white;">
+                        <label for="commentort_email">Email</label>
+                        <input type="email" name="commentor_email" class="commentor_email" id="commentor_email" placeholder="eg.ngecu16@gmail.com" style=" background-color: #2f353b;color: white;">
+                        <label for="comment">Comment</label>
+                        <textarea name="comment" class="comment" id="comment" cols="30" rows="10" placeholder="drop a comment" style=" background-color: #2f353b;color: white;"></textarea>
+                
+                            <button type="submit" class="btn btn-primary  btn-lg send">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col s12, m12, l12  p-2 flex-fill bd-highlight ">
+
+                              <h4 id="commentsadd" >Comments({{comment_count}})</h4>
+                              
+                                  <div class="row" style="height: 300px;">
+                                    <div class="col-sm comment-list" style="overflow-y: auto;height: 100%;">
+                                      {% for comment in comments %}
+                                      <div class="be-comment d-flex flex-row bd-highlight mb-3">
+                                        <div class="be-img-comment col-3" >
+                                            <img style="height: 100px;width: 100px;" src="{% static 'main/img/guest-user.jpg' %}" alt="" class="be-ava-comment">
+                                        </div>
+                        
+                                        <div class="be-comment-content col-9">
+                                          <style>
+                                            p{
+                                              margin: 0;
+                                              padding: 0;
+                                            }
+                                          </style>
+                        
+                                          <p class="be-comment-name">
+                                            <b>
+                                          {{comment.name}}
+                                        </b>
+                                          </p>
+                                         
+                                          <span class="be-comment-time">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{comment.created_on}}
+                                    
+                                          </span>
+                        
+                                          <p class="be-comment-text">
+                                            {{comment.body}}
+                                          </p>
+                                          <div class="d-flex" >
+                                            <p class="likebutton likerbtn" id="like{{comment.id}}" href="#" data-likecounter="{{ comment.like_set.count }}" data-catid="{{comment.id}}" data-ptext={{comment.body}} ><i class="fas fa-thumbs-up likefontawesome"></i> <span style="color: black;" class="likecounter counter" data-likecounter="{{ comment.like_set.count }}">{{ comment.like_set.count }} </span> </p>
+                                            <p class="dislikebutton likerbtn" id="dislike{{comment.id}}" href="#" data-catid="{{comment.id}}" data-ptext={{comment.body}} ><i class="fas fa-thumbs-down"></i> <span style="color: black;" class="dislikecounter counter dislikefontawesome">{{ comment.dislike_set.count }}</span> </p>
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {% endfor %}
+                                    </div>
+
+                                  </div>
+                        
+                                
+                            
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                
+          
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    $('.send').click(function(){
+        var commentor_name = document.querySelector('.commentor_name').value;
+        var commentor_email = document.querySelector('.commentor_email').value;
+        var comment = $( "#comment" ).val();
+
+        console.log(commentor_email)
+        console.log(commentor_name)
+        console.log(comment)
+        console.log('{{tutorial_series.tutorial_series}}')
+
+
+
+    $.ajax(
+    {
+        type:"GET",
+        url: "/comment/{{tutorial_series.tutorial_series}}",
+        data:{
+          name:commentor_name,
+          email: commentor_email,
+          comment:comment,
+          tutorial_series : '{{tutorial_series.tutorial_series}}'
+                 
+        },
+        success: function( data ) 
+        {
+          
+          M.toast({html: data, classes: 'green rounded', displayLength:10000})
+          var commentsadd = document.querySelector('#commentsadd') 
+          commentsadd.innerHTML = "comments " + parseInt('{{comment_count}}') + 1;
+          console.log('{{comment_count}}')
+          var txt1 = `   <div class="be-comment d-flex flex-row bd-highlight mb-3">
+                                        <div class="be-img-comment col-3" >
+                                            <img style="height: 100px;width: 100px;" src="{% static 'main/img/guest-user.jpg' %}" alt="" class="be-ava-comment">
+                                        </div>
+                        
+                                        <div class="be-comment-content col-9">
+                                          <style>
+                                            p{
+                                              margin: 0;
+                                              padding: 0;
+                                            }
+                                          </style>
+                        
+                                          <p class="be-comment-name">
+                                            <b>
+                                            ${commentor_name}
+                                         
+                                        </b>
+                                          </p>
+                                         
+                                          <span class="be-comment-time">
+                                            <i class="fa fa-clock-o"></i>
+                                   
+                                          </span>
+                        
+                                          <p class="be-comment-text">
+                                            ${comment}
+                                        
+                                          </p>
+                                          <div class="d-flex" >
+                                            <p class="likebutton likerbtn" id="like{{comment.id}}" href="#" data-likecounter="{{ comment.like_set.count }}" data-catid="{{comment.id}}" data-ptext={{comment.body}} ><i class="fas fa-thumbs-up likefontawesome"></i> <span style="color: black;" class="likecounter counter" data-likecounter="{{ comment.like_set.count }}">{{ comment.like_set.count }} </span> </p>
+                                            <p class="dislikebutton likerbtn" id="dislike{{comment.id}}" href="#" data-catid="{{comment.id}}" data-ptext={{comment.body}} ><i class="fas fa-thumbs-down"></i> <span style="color: black;" class="dislikecounter counter dislikefontawesome">{{ comment.dislike_set.count }}</span> </p>
+
+                                          </div>
+                                        </div>
+                                      </div>   `
+
+          $(".comment-list").append(txt1);   // Append new elements
+        }
+     })
+});
+
+
+
+    $('.likebutton').click(function(){
+    
+    var catid = $(this).attr("data-catid");
+    var ptext = $(this).attr("data-ptext");
+    console.log("this is catid : ",catid)
+    console.log("this is ptext : ",ptext)
+    console.log(this.children.innerHTML)
+    var that = this;
+    $.ajax(
+    {
+        type:"GET",
+        url: "/likecomment",
+        data:{
+                 comment_id: catid,
+                 comment_text:ptext,
+        },
+        success: function( data ) 
+        {
+            
+          
+            // $('.likecounter').html(new_pop);
+            // console.log(that.children[1].innerHTML)
+            
+            that.children[1].innerHTML = parseInt(that.children[1].innerHTML) + 1
+            that.children[0].remove();
+            // console.log(that.children[1].innerHTML)
+           
+
+
+            M.toast({html: data, classes: 'green rounded', displayLength:10000})
+            
+        },
+        error: function () {
+            M.toast({html: "error on ", classes: 'red accent-4 rounded', displayLength:10000})
+ 
+        }
+
+     })
+});
+
+$('.dislikebutton').click(function(){
+    var counter = document.querySelector('.dislikecounter').innerHTML;
+    console.log("this is counter",counter)
+
+    var catid = $(this).attr("data-catid");
+    var ptext = $(this).attr("data-ptext");
+
+    var that = this;
+    
+  
+    $.ajax(
+    {
+        type:"GET",
+        url: "/dislikecomment",
+        data:{
+                 comment_id: catid,
+                 comment_text:ptext,
+        },
+        success: function( data ) 
+        {
+           
+            that.children[1].innerHTML = parseInt(that.children[1].innerHTML) + 1
+            that.children[0].remove();
+            
+           
+            M.toast({html: data, classes: 'red accent-4 rounded', displayLength:10000})
+
+            
+        },
+        error: function () {
+            M.toast({html: data, classes: 'red accent-4 rounded', displayLength:10000})
+ 
+        }
+     })
+});
+</script>
+
+
+
+
+{% endblock %}

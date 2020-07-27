@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datascience with Python articles and projects</title>
+</head>
+<body>
+
+{% extends 'main/home.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="categories--wrapper">
+    <div>
+    <img src="{% static 'main/images/logo2.png' %}" >
+    <h1>Follow us on social media</h1>
+        </div>
+     <div class="socials">
+            <a href="https://github.com/wamaithanyamu" target="blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/wamaithanyamu" target="blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://linkedin.com/datadrivenpy" target="blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com/wamaithanyams" target="blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+
+            <a href="https://instagram.com/datadriven.py" target="blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:wamaithanyamu@gmail.com">
+            <i class="far fa-paper-plane"></i>
+                </a>
+
+        </div>
+
+
+        {% for cat in categories %}
+                <div class="categories--card">
+
+                <a href="{{cat.category_slug}}">
+                            <div class="cat--title">{{cat.tutorial_category}}</div></a>
+                         <div class="cat--summary">{{cat.category_summary}}</div>
+
+            </div>
+        {% endfor %}
+        </div>
+
+{% endblock %}
+
+
+</body>
+</html>

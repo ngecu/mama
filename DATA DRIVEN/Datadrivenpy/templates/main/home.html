@@ -1,0 +1,29 @@
+<html>
+{% load static %}
+<!-- Prism CSS -->
+<link href="{% static "main/css/prism.css" %}" rel="stylesheet">
+<link href="{% static 'main/css/reset.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+ <link  href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700&display=swap" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+  {% block content %}
+  {% endblock %}
+
+<!-- Prism JS -->
+<script src="{% static "main/js/prism.js" %}"></script>
+<script src="{% static 'main/js/index.js' %}"></script>
+<script>M.AutoInit();</script>
+
+
+</body>
+</html>

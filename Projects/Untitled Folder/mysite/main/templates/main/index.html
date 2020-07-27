@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/0cc3d8b950.js" crossorigin="anonymous"></script>
+	<link href="./css/prism.css" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+    <link href="./css/materialize.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <title>&#128521;Dev Ngecu</title>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="./css/style.css" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   
+  <!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+</head>
+<body>
+
+    <div class="navbar-fixed " onload="startTime()">
+        <nav>
+         <div class="nav-wrapper  grey darken-4">
+           <a href="/" class="brand-logo">DevNgecu</a><a href="" class="typewrite" data-period="2000" data-type='[" Code Like A BOSS", " Python"," JavaScript"]'>
+             <span class="wrap" style="color: white;"></span>
+           </a>
+           <ul id="nav-mobile" class="right hide-on-med-and-down">
+             <li><a href="/">Home</a></li>
+             <li>  {{today}}</li>
+     
+           </ul>
+         </div>
+       </nav>
+       </div>
+
+
+    <p id="message" style="float: right;"></p>
+    <div class="d-flex flex-column bd-highlight mb-3 soc1">
+      <div class="p-2 bd-highlight">
+        <a href="https://github.com/ngecu/">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a href="https://www.linkedin.com/in/robinson-ngecu-6a037688/">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a href="https://twitter.com/_ngecu">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="container">
+<div class="row d-flex bd-highlight">
+    <div class="col s12 m6 l4 p-2p-2 flex-fill bd-highlight" style="border-bottom: #FF9E00 10px solid;margin: 5px;">
+        <img src="https://devngecu.herokuapp.com/static/main/img/DSC_1153.JPG" alt="" style="width: 100%;">
+    </div>
+    <div class="col s12 m6 l4 p-2p-2 flex-fill bd-highlight" style="color: aliceblue;border-bottom: red 10px solid;margin: 5px;">
+    <div style="font-size: 20px;">Hey there! My name is <span>Robinson Ngecu</span> from the great mother land of Kenya.&#128521;I am a Web Developer currently learning JavaScript and Python.I post videos on 
+        <div class="g-ytsubscribe" data-channelid="UCUEr3z34uxW_3r0ruUxqzkw" data-layout="default" data-count="hidden"></div>
+        and code on<a class="github-button" href="https://github.com/ngecu" target="_blank" aria-label="Follow @ngecu on GitHub">Github</a> 
+    </div>
+    <div id="chart" style="height: auto;">
+        <canvas id="myChart"></canvas>
+      </div>
+ 
+   
+   
+    </div>
+    
+  </div>
+
+    <div class="row d-flex bd-highlight">
+      <a class="modal-trigger" target="_blank" href="#modal1">
+
+            <div class="col s12 m6 l4 p-2 flex-fill bd-highlight">
+                    <div class="card hoverable">
+                        <div class="card-content">
+                          <img src="tutoiral.png" alt="" style="width: 100%;">
+                          <div class="card-title">Tutorials</div>
+                            <!--<p style="font-size:70%">Published {{tut.tutorial_published}}</p>-->
+                            <p></p>
+                            <div class="collapsible-body">
+                                <p><a href="/{{cat.category_slug}}"><button class="btn waves-effect waves-light right-align" style="background-color:yellow; color:black">Go</button></a></p>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+          </a>
+          <div style="text-align: center;vertical-align:middle;display: inline;">
+            <h1 style="color: #fff;position: relative;top: 50%;">&#8654;</h1>
+          </div>
+            <a class="modal-trigger" href="#modal2">
+            <div class="col s12 m6 l4 p-2 flex-fill bd-highlight" >
+
+                  <div class="card hoverable">
+                      <div class="card-content">
+                        <img src="{% static 'main/img/archives.jpg' %}" alt="" style="width: 100%;">
+                        <div class="card-title">Archives</div>
+                          <!--<p style="font-size:70%">Published {{tut.tutorial_published}}</p>-->
+                          <p></p>
+                          <div class="collapsible-body">
+                              <p><a href="/{{cat.category_slug}}"><button class="btn waves-effect waves-light right-align" style="background-color:yellow; color:black">Go</button></a></p>
+
+                          </div>
+                      </div>
+                  </div>
+                
+          </div>
+        </a>     
+        
+    </div>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>TUTORIAlS</h4>
+        
+           
+         
+          <div class="d-flex p-2 bd-highlight">
+        
+          <div class="card col-md-3" style="width: 18rem;">
+              <div class="card-body">
+                  <h5 class="card-title"> tut.tutorial_series1</h5>
+                  <img src="{{tut.series_image.url}}" alt="" style="width: 100%;">
+                  <p class="card-text">tut.series_summary1</p>
+                  <button type="button" class="btn btn-primary">
+                    <a href="{% url 'tutorial_series' tut.tutorial_series %}" target="_blank" class="card-link">View</a>
+                  </button>
+
+
+              </div>
+          </div>
+
+          <div class="card col-md-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"> tut.tutorial_series1</h5>
+                <img src="{{tut.series_image.url}}" alt="" style="width: 100%;">
+                <p class="card-text">tut.series_summary1</p>
+                <button type="button" class="btn btn-primary">
+                  <a href="{% url 'tutorial_series' tut.tutorial_series %}" target="_blank" class="card-link">View</a>
+                </button>
+
+
+            </div>
+        </div>
+
+        <div class="card col-md-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"> tut.tutorial_series1</h5>
+                <img src="{{tut.series_image.url}}" alt="" style="width: 100%;">
+                <p class="card-text">tut.series_summary1</p>
+                <button type="button" class="btn btn-primary">
+                  <a href="{% url 'tutorial_series' tut.tutorial_series %}" target="_blank" class="card-link">View</a>
+                </button>
+
+
+            </div>
+        </div>
+    
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>ARCHIVES</h4>
+          <div class="d-flex p-2 bd-highlight">
+          {% for archive in archives %}
+          <div class="card col-md-3" style="width: 18rem;">
+              <div class="card-body">
+                  <h5 class="card-title"> {{archive.archive_title}}</h5>
+                  <img src="{{archive.image.url}}" alt="" style="width: 100%;">
+                  <p class="card-text">{{archive.archive_description}}</p>
+                  <button type="button" class="btn btn-primary">
+                  <a href="{{archive.archive_url}}" target="_blank" class="card-link">View</a>
+                  </button>
+
+
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+
+    <div class="lightbox">
+        <div class="iframeContainer">
+          <div class="toolbarLB">
+            <span class="closeLB" onclick="lightBoxClose()">x</span>
+          </div>
+          <div class="alert alert-dark" role="alert">
+            <div class="row">
+              <div class="col-sm">
+                <img src="./css/developer.png" alt="">
+              </div>
+              <div class="col-sm">
+                <div class="d-flex flex-column ">
+                  <div class="p-2 bd-highlight"> <h1>READY TO GET SERIOUS ABOUT YOUR PROGRAMMING SKILLS?</h1> </div>
+                  <div class="p-2 bd-highlight dotted">
+                    <h2> <b>Subscribe and get</b> Notifications on my upcoming projects  </h2>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <div class="d-flex flex-column">
+                      
+                        <label for="email"></label>
+                        <input type="email" name="" id="email" class="email-ad" placeholder="My Email">
+                        <button type="button" class="btn btn-primary send"  > SEND ME</button>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+          </div>
+        </div>
+      </div> 
+    </div>
+</body>
+<script>
+    lightBoxClose = function() {
+  document.querySelector(".lightbox").classList.add("closed");
+}
+
+var ctx = document.getElementById('myChart').getContext('2d');
+ 
+fetch('https://covid19.mathdro.id/api')
+// Replace ./data.json with your JSON feed
+.then(response => {
+return response.json()
+})
+.then(data => {
+// Work with JSON data here
+var myChart = new Chart(ctx, {
+    
+    type: 'bar',
+    data: {
+        labels: ['Confrimed', 'Recovered', 'Deaths'],
+        datasets: [{
+            label: 'World State',
+            data: [data.confirmed.value, data.recovered.value, data.deaths.value],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+                
+            ],
+            borderColor: [
+                '#ffd600',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        legend: {
+            labels: {
+                fontColor: "white",
+                fontSize: 18
+            }
+        },
+
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    fontSize: 18,
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+var confirmed = new CountUp("confirmedValue", 0,data.confirmed.value, 0, 2.5);
+confirmed.start();
+
+var recovered = new CountUp("recoveredValue", 0,data.recovered.value, 0, 2.5);
+recovered.start();
+
+var deaths = new CountUp("deathsValue", 0,data.deaths.value, 0, 2.5);
+deaths.start();
+
+})
+</script>
+</html>

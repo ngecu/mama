@@ -1,0 +1,54 @@
+{% extends 'main/home.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="nav--category">
+   <a href="/"><img src="{% static 'main/images/logo2.png' %}" ></a>
+
+</div>
+    <div class="sticky--socials">
+            <a href="https://github.com/wamaithanyamu" target="blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/wamaithanyamu" target="blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://linkedin.com/datadrivenpy" target="blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com/wamaithanyams" target="blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+
+            <a href="https://instagram.com/datadriven.py" target="blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:wamaithanyamu@gmail.com">
+            <i class="far fa-paper-plane"></i>
+                </a>
+
+        </div>
+<section>
+       {% for tut in tutorial_series %}
+           <div class="series-title">   {{tut.tutorial_series}} </div>
+           <hr>
+           <div class="tutseriescard">
+             {% for tutorial in tut.tutorial_set.all %}
+             <div class="tutseries--card">
+                   <a href="/{{tutorial.tutorial_slug}}">
+                        <h1>  {{tutorial.tutorial_title}}</h1>
+                        <h3> {{ tutorial.tutorial_summary|safe }}</h3>
+                        <h6>  {{ tutorial.tutorial_published }}</h6>
+                    </a>
+                 </div>
+
+            {% endfor %}
+
+           </div>
+       {% endfor %}
+
+
+</section>
+
+{% endblock %}
+
